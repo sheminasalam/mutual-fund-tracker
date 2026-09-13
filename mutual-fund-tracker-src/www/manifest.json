@@ -1,0 +1,17 @@
+{
+  "name": "Mutual Fund Tracker",
+  "short_name": "Mutual Funds",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f3f4f6",
+  "theme_color": "#1565c0",
+  "icons": [
+    {
+      "src": "./icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "version": "1.0.0"
+}

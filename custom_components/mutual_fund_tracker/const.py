@@ -1,0 +1,9 @@
+DOMAIN = "mutual_fund_tracker"
+STATE_FILES = ("/share/mutual_fund_tracker/integration_state.json", "/config/mutual_fund_tracker/integration_state.json")
+UPDATE_INTERVAL_SECONDS = 30
+STATE_VERSION = 3
+REFRESH_REQUEST_FILE = "/share/mutual_fund_tracker/refresh.request"
+EXPORT_REQUEST_FILE = "/share/mutual_fund_tracker/export.request"
+INTEGRATION_RELOAD_ACK_FILE = "/share/mutual_fund_tracker/integration_reload.ack"
+EXPORT_SHARE_DIR = "/share/mutual_fund_tracker/exports"
+HA_EXPORT_DIR = "/config/www/mutual_fund_tracker"

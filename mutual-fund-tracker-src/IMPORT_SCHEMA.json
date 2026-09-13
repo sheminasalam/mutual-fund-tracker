@@ -1,0 +1,47 @@
+{
+  "format_version": 2,
+  "template": true,
+  "source": {
+    "type": "MUTUAL_FUND_TRACKER_TEMPLATE",
+    "statement_from": "YYYY-MM-DD",
+    "statement_to": "YYYY-MM-DD"
+  },
+  "investors": [
+    {
+      "ref": "investor_1",
+      "name": "<investor name>",
+      "emails": ["<email>"],
+      "phone": "<phone/mobile>",
+      "pan": "<PAN>",
+      "address": {
+        "line1": "",
+        "line2": "",
+        "city": "",
+        "state": "",
+        "postal_code": "",
+        "country": "India"
+      }
+    }
+  ],
+  "unresolved": [],
+  "funds": [
+    {
+      "investor_ref": "investor_1",
+      "scheme_code": "<optional verified code; leave blank if uncertain>",
+      "scheme_name": "<canonical fund name>",
+      "isin": "<ISIN>",
+      "folios": ["<folio>"],
+      "sip": {"enabled": true, "amount": 2500, "day": 20},
+      "closing_balance": {"valuation_date":"YYYY-MM-DD","units":0,"cost_value":0,"nav":0,"market_value":0},
+      "history": {
+        "sip_blocks": [
+          {"amount":2500,"charges":0,"count":12,"start_date":"YYYY-MM-DD","end_date":"YYYY-MM-DD","sip_day":20,"folio":"<folio>"}
+        ],
+        "transactions": [
+          {"date":"YYYY-MM-DD","type":"lumpsum","amount":0,"units":0,"nav":0,"charges":0,"cashflow":0,"folio":"<folio>","note":""}
+        ]
+      }
+    }
+  ],
+  "description": "Reference structure for Mutual Fund Tracker compact v2 imports. The downloadable template intentionally contains an empty funds array so it cannot be mistaken for real investment data."
+}

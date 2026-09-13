@@ -1,0 +1,16 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Mutual Fund Tracker",
+        "description": "Connect the Mutual Fund Tracker app. It exports portfolio data to {state_file}.",
+        "data": {
+          "name": "Name"
+        }
+      }
+    },
+    "abort": {
+      "single_instance_allowed": "The Mutual Fund Tracker integration is already configured."
+    }
+  }
+}

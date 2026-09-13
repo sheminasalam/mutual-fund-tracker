@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Mutual Fund Tracker</title>
+<link rel="icon" type="image/png" href="./icon.png?v=0.1.187" />
+<link rel="apple-touch-icon" href="./icon.png?v=0.1.187" />
+<link rel="manifest" href="./manifest.json?v=0.1.187" />
+<link rel="stylesheet" href="./style.css?v=1.0.0" />
+<script>try{if(localStorage.getItem('mft_theme')==='dark')document.documentElement.dataset.theme='dark';}catch(e){}</script>
+</head>
+<body>
+<header class="topbar">
+  <div class="header-brand">
+    <div class="brand-wrap">
+      <img class="header-logo" src="./logo.png?v=0.1.187" alt="Mutual Fund Tracker logo">
+      <div>
+        <div class="eyebrow">HOME ASSISTANT</div>
+        <h1>Mutual Fund Tracker</h1>
+      </div>
+    </div>
+  </div>
+
+  <div id="marketStatus" class="header-status-area" aria-label="NSE and market status">
+    <div class="header-status-switches">
+      <div class="header-status-item"><span class="app-status-switch is-closed"><span class="app-status-track"><span class="app-status-knob"></span></span></span><span class="app-status-title">NSE Today</span></div>
+      <div class="header-status-item"><span class="app-status-switch is-closed"><span class="app-status-track"><span class="app-status-knob"></span></span></span><span class="app-status-title">NSE Tomorrow</span></div>
+      <div class="header-status-item"><span class="app-status-switch is-closed"><span class="app-status-track"><span class="app-status-knob"></span></span></span><span class="app-status-title">NSE Trading</span></div>
+    </div>
+    <div class="header-status-info">
+      <div class="header-status-info-line header-status-nifty">NIFTY 50 —</div>
+      <div class="header-status-info-line header-status-nse-reason">NSE: —</div>
+            <div class="header-status-info-sub">Last status check: —</div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <div class="refresh-group">
+      <button id="refreshBtn" class="blue-action-btn blue-action-wide" type="button" title="Refresh NAV"><span class="blue-action-icon" aria-hidden="true">↻</span><span class="blue-action-text">Refresh NAV</span></button>
+      <div class="refresh-meta">
+        <div id="navRefreshInfo" class="refresh-info"><span class="refresh-date">Last NAV refresh: —</span><span class="refresh-time"></span><span class="refresh-interval"></span></div>
+        <div id="navProgressWrap" class="nav-progress hidden"><div class="nav-progress-track"><div id="navProgressBar" class="nav-progress-bar"></div></div><div id="navProgressMsg" class="nav-progress-msg">Updating NAVs…</div></div>
+      </div>
+    </div>
+    <div class="icon-actions">
+      <div class="plus-menu-wrap">
+        <button id="plusMenuBtn" class="icon-action-btn" type="button" aria-haspopup="true" aria-expanded="false" title="More actions">+</button>
+        <div id="plusMenu" class="plus-menu hidden" role="menu">
+          <button id="importBtn" type="button" role="menuitem">Import JSON</button>
+          <button id="addBtn" type="button" role="menuitem">Add Mutual Fund</button>
+          <button id="addInvestorMenuBtn" type="button" role="menuitem">Add Investor</button>
+        </div>
+      </div>
+      <button id="settingsBtn" class="icon-action-btn" type="button" title="Settings" aria-label="Settings">⚙</button>
+      <button id="themeBtn" class="icon-action-btn theme-toggle-btn" type="button" title="Enable dark mode" aria-label="Enable dark mode">☾</button>
+      <button id="exitBtn" class="icon-action-btn" type="button" title="Exit" aria-label="Exit">×</button>
+    </div>
+  </div>
+</header>
+
+<section class="profile-bar">
+  <div class="profile-select-wrap">
+    <label for="profileSelect">Investor profile</label>
+    <select id="profileSelect"></select>
+  </div>
+  <div class="profile-actions">
+    <button id="editUserBtn" class="blue-icon-btn" type="button" title="Edit Investor" aria-label="Edit Investor">✎</button>
+  </div>
+</section>
+
+<section id="investorCard" class="investor-card"></section>
+
+<main>
+  <section class="summary-grid">
+    <div class="summary-card"><div class="label">Total Value</div><div id="sValue" class="big">—</div></div>
+    <div class="summary-card"><div class="label">Total Invested</div><div id="sInvested" class="big">—</div></div>
+    <div class="summary-card"><div class="label">Total Profit</div><div id="sProfit" class="big">—</div><div id="sProfitPct" class="sub">—</div></div>
+    <div class="summary-card"><div class="label">Portfolio XIRR</div><div id="sXirr" class="big">—</div></div>
+    <div class="summary-card"><div class="label">Monthly Returns</div><div id="sMonth" class="big">—</div></div>
+    <div class="summary-card"><div class="label">Today's Change</div><div id="sDay" class="big">—</div></div>
+  </section>
+
+  <section class="portfolio-tabs" aria-label="Portfolio view">
+    <button id="portfolioTableTab" class="portfolio-tab-btn is-active" type="button">Table</button>
+    <button id="portfolioGraphsTab" class="portfolio-tab-btn" type="button">Graphs</button>
+  </section>
+
+  <section id="portfolioTablePanel">
+    <section class="toolbar">
+      <div class="table-filter-group">
+        <div class="searchbox"><input id="filterBox" placeholder="Search funds…" aria-label="Search funds" /></div>
+        <button id="filterToggleBtn" class="blue-action-btn filter-toggle-btn" type="button" aria-expanded="false">Filters</button>
+      </div>
+      <div class="sort-controls"><label for="sortSelect">Sort by</label><select id="sortSelect"><option value="fund_name">Fund Name</option><option value="sip_amount">SIP Amount</option><option value="sip_day">SIP Date</option><option value="day_change">Day Change</option><option value="day_pct">Day %</option><option value="month_change">Month Change</option><option value="month_pct">Month %</option><option value="value">Total Value</option><option value="year_change">Year Returns</option><option value="invested">Invested</option><option value="profit">Total Profit</option><option value="profit_pct">Profit %</option><option value="xirr">XIRR %</option></select><button id="sortDirBtn" class="blue-icon-btn sort-dir-btn" type="button" title="Sort ascending" aria-label="Sort ascending">↑</button></div>
+      <div class="toolbar-right"><div class="muted" id="fundCount">0 funds</div><button id="exportPngBtn" class="blue-action-btn export-png-btn" type="button" title="Export PNG" aria-label="Export PNG">Export PNG</button></div>
+    </section>
+    <section id="filterPanel" class="table-filter-panel hidden" aria-label="Fund filters">
+      <div class="filter-field"><label for="sipFilter">SIP status</label><select id="sipFilter"><option value="all">All funds</option><option value="active">Active SIP</option><option value="inactive">Stopped / inactive SIP</option><option value="executed">Executed SIP</option><option value="not_executed">Non-executed SIP</option><option value="none">No SIP</option></select></div>
+      <div class="filter-field"><label for="returnsFilter">Total return</label><select id="returnsFilter"><option value="all">All returns</option><option value="profit">Profitable</option><option value="loss">Loss-making</option><option value="nodata">No return data</option></select></div>
+      <div class="filter-field"><label for="planFilter">Plan</label><select id="planFilter"><option value="all">All plans</option><option value="Direct">Direct</option><option value="Regular">Regular</option><option value="Other">Other</option></select></div>
+      <div class="filter-field"><label for="optionFilter">Option</label><select id="optionFilter"><option value="all">All options</option><option value="Growth">Growth</option><option value="IDCW / Dividend">IDCW / Dividend</option><option value="Other">Other</option></select></div>
+      <div class="filter-field filter-category-field"><label for="categoryFilter">Scheme category</label><select id="categoryFilter" aria-label="Scheme category filter"><option value="all">All categories</option></select></div>
+      <div class="filter-separator" aria-hidden="true"></div>
+      <div class="filter-field metric-filter-field"><label for="metricFilter">Parameter</label><select id="metricFilter"><option value="">No numeric filter</option><option value="sip_amount">SIP Amount</option><option value="sip_day">SIP Day</option><option value="day_change">Day Change</option><option value="day_pct">Day %</option><option value="month_change">Month Change</option><option value="month_pct">Month %</option><option value="value">Total Value</option><option value="year_change">Year Returns</option><option value="invested">Invested</option><option value="profit">Total Profit</option><option value="profit_pct">Profit %</option><option value="xirr">XIRR %</option></select></div>
+      <div class="filter-field filter-relation-field"><label for="metricRelation">Relationship</label><select id="metricRelation"><option value=">">&gt;</option><option value=">=">&gt;=</option><option value="=">=</option><option value="<=">&lt;=</option><option value="<">&lt;</option></select></div>
+      <div class="filter-field metric-value-field"><label for="metricValue">Value</label><input id="metricValue" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" placeholder="e.g. 10" aria-label="Filter value"></div>
+      <button id="clearFiltersBtn" class="blue-action-btn" type="button">Clear Filters</button>
+    </section>
+    <section class="table-wrap">
+    <table class="fund-data-table">
+      <colgroup><col class="col-fund"><col class="col-sip-amount"><col class="col-sip-date"><col class="col-day-amount"><col class="col-day-pct"><col class="col-month-amount"><col class="col-month-pct"><col class="col-value"><col class="col-year"><col class="col-invested"><col class="col-profit"><col class="col-profit-pct"><col class="col-xirr"><col class="col-actions"></colgroup>
+      <thead>
+        <tr>
+          <th rowspan="2">Fund Name</th>
+          <th colspan="2">SIP Info</th>
+          <th colspan="2">Day Returns</th>
+          <th colspan="2">Month Returns</th>
+          <th rowspan="2">Total Value</th>
+          <th rowspan="2">Year Returns</th>
+          <th rowspan="2">Invested</th>
+          <th colspan="2">Total Returns</th>
+          <th rowspan="2">XIRR%</th>
+          <th rowspan="2"></th>
+        </tr>
+        <tr>
+          <th>Amount</th><th>Date</th>
+          <th>Amount</th><th>%</th>
+          <th>Amount</th><th>%</th>
+          <th>Amount</th><th>%</th>
+        </tr>
+      </thead>
+      <tbody id="fundRows"></tbody>
+      <tfoot id="totalsRow"></tfoot>
+    </table>
+    </section>
+  </section>
+
+  <section id="portfolioGraphsPanel" class="portfolio-graphs-panel hidden">
+    <div class="graphs-toolbar">
+      <div><strong>Historical performance</strong><span id="graphFundCount" class="muted">0 funds</span></div>
+      <div class="hint" id="graphStatus">Select funds, parameters and a time period.</div>
+    </div>
+    <div class="graph-controls">
+      <div class="graph-control-group graph-funds-group"><label>Funds</label><div id="graphFundPicker" class="multi-picker" role="group" aria-label="Graph funds"></div></div>
+      <div class="graph-control-group"><label>Parameters</label><div class="graph-checks" id="graphParameterPicker">
+        <label><input type="checkbox" value="total_value" checked> Total Value</label>
+        <label><input type="checkbox" value="total_invested"> Total Invested</label>
+        <label><input type="checkbox" value="day_change"> Day Change</label>
+        <label><input type="checkbox" value="profit_pct"> Profit %</label>
+      </div></div>
+      <div class="graph-control-group"><label>Time period</label><div class="graph-periods" id="graphPeriodPicker">
+        <button type="button" data-period="1m">1 Month</button><button type="button" data-period="30d">30 Days</button><button type="button" data-period="3m">3 Months</button><button type="button" data-period="6m">6 Months</button><button type="button" data-period="1y" class="is-active">1 Year</button><button type="button" data-period="inception">Inception</button>
+      </div></div>
+      <div class="graph-actions"><button id="buildGraphsBtn" class="blue-action-btn" type="button">Build Graph</button><button id="selectAllGraphFundsBtn" class="blue-action-btn secondary" type="button">All Funds</button><button id="clearGraphFundsBtn" class="blue-action-btn secondary" type="button">Clear</button></div>
+    </div>
+    <div class="graph-note">Historical graphs reconstruct units and invested value from the transaction history and daily NAV history. Missing historical NAV data is fetched once and cached locally.</div>
+    <div id="graphLoading" class="graph-loading hidden"><div class="graph-spinner"></div><div><strong>Preparing graph…</strong><span id="graphLoadingText">Fetching historical data.</span></div></div>
+    <div id="graphWarnings" class="graph-warnings hidden"></div>
+    <div id="historicalGraphGrid" class="historical-graph-grid"></div>
+  </section>
+
+  <section class="legend">
+    <span><i class="dot green"></i> Positive</span>
+    <span><i class="dot red"></i> Negative</span>
+    <span><i class="dot gray"></i> No data</span>
+  </section>
+</main>
+
+<div id="modal" class="modal hidden">
+  <div class="modal-card">
+    <div class="modal-head"><div class="modal-head-title-wrap"><h2 id="modalTitle">Add Mutual Fund</h2><div id="modalHeadActions"></div></div><button class="icon-btn" onclick="closeModal()">×</button></div>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<script src="./app.js?v=1.0.0"></script>
+</body>
+</html>

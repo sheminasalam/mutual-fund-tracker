@@ -1,0 +1,2197 @@
+{
+  "year": 2026,
+  "generated_at": "2026-08-16T00:00:00Z",
+  "source": "NSE 2026 holiday calendar seed with special session overrides",
+  "dates": {
+    "2026-01-01": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-01-02": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-01-03": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-01-04": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-01-05": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-01-06": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-01-07": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-01-08": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-01-09": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-01-10": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-01-11": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-01-12": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-01-13": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-01-14": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-01-15": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-01-16": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-01-17": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-01-18": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-01-19": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-01-20": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-01-21": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-01-22": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-01-23": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-01-24": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-01-25": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-01-26": {
+      "nse_open": false,
+      "type": "NSE_HOLIDAY",
+      "description": "Republic Day",
+      "holiday_type": "TRADING_HOLIDAY"
+    },
+    "2026-01-27": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-01-28": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-01-29": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-01-30": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-01-31": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-02-01": {
+      "nse_open": true,
+      "type": "SPECIAL_OPEN",
+      "description": "Special trading session – Union Budget",
+      "holiday_type": "SPECIAL_TRADING"
+    },
+    "2026-02-02": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-02-03": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-02-04": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-02-05": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-02-06": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-02-07": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-02-08": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-02-09": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-02-10": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-02-11": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-02-12": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-02-13": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-02-14": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-02-15": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-02-16": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-02-17": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-02-18": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-02-19": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-02-20": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-02-21": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-02-22": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-02-23": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-02-24": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-02-25": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-02-26": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-02-27": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-02-28": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-03-01": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-03-02": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-03-03": {
+      "nse_open": false,
+      "type": "NSE_HOLIDAY",
+      "description": "Holi",
+      "holiday_type": "TRADING_HOLIDAY"
+    },
+    "2026-03-04": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-03-05": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-03-06": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-03-07": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-03-08": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-03-09": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-03-10": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-03-11": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-03-12": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-03-13": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-03-14": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-03-15": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-03-16": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-03-17": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-03-18": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-03-19": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-03-20": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-03-21": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-03-22": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-03-23": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-03-24": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-03-25": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-03-26": {
+      "nse_open": false,
+      "type": "NSE_HOLIDAY",
+      "description": "Shri Ram Navami",
+      "holiday_type": "TRADING_HOLIDAY"
+    },
+    "2026-03-27": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-03-28": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-03-29": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-03-30": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-03-31": {
+      "nse_open": false,
+      "type": "NSE_HOLIDAY",
+      "description": "Shri Mahavir Jayanti",
+      "holiday_type": "TRADING_HOLIDAY"
+    },
+    "2026-04-01": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-04-02": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-04-03": {
+      "nse_open": false,
+      "type": "NSE_HOLIDAY",
+      "description": "Good Friday",
+      "holiday_type": "TRADING_HOLIDAY"
+    },
+    "2026-04-04": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-04-05": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-04-06": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-04-07": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-04-08": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-04-09": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-04-10": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-04-11": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-04-12": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-04-13": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-04-14": {
+      "nse_open": false,
+      "type": "NSE_HOLIDAY",
+      "description": "Dr. Baba Saheb Ambedkar Jayanti",
+      "holiday_type": "TRADING_HOLIDAY"
+    },
+    "2026-04-15": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-04-16": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-04-17": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-04-18": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-04-19": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-04-20": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-04-21": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-04-22": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-04-23": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-04-24": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-04-25": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-04-26": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-04-27": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-04-28": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-04-29": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-04-30": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-05-01": {
+      "nse_open": false,
+      "type": "NSE_HOLIDAY",
+      "description": "Maharashtra Day",
+      "holiday_type": "TRADING_HOLIDAY"
+    },
+    "2026-05-02": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-05-03": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-05-04": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-05-05": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-05-06": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-05-07": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-05-08": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-05-09": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-05-10": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-05-11": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-05-12": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-05-13": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-05-14": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-05-15": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-05-16": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-05-17": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-05-18": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-05-19": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-05-20": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-05-21": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-05-22": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-05-23": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-05-24": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-05-25": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-05-26": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-05-27": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-05-28": {
+      "nse_open": false,
+      "type": "NSE_HOLIDAY",
+      "description": "Bakri Id",
+      "holiday_type": "TRADING_HOLIDAY"
+    },
+    "2026-05-29": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-05-30": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-05-31": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-06-01": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-06-02": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-06-03": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-06-04": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-06-05": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-06-06": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-06-07": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-06-08": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-06-09": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-06-10": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-06-11": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-06-12": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-06-13": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-06-14": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-06-15": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-06-16": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-06-17": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-06-18": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-06-19": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-06-20": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-06-21": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-06-22": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-06-23": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-06-24": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-06-25": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-06-26": {
+      "nse_open": false,
+      "type": "NSE_HOLIDAY",
+      "description": "Muharram",
+      "holiday_type": "TRADING_HOLIDAY"
+    },
+    "2026-06-27": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-06-28": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-06-29": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-06-30": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-07-01": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-07-02": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-07-03": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-07-04": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-07-05": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-07-06": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-07-07": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-07-08": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-07-09": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-07-10": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-07-11": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-07-12": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-07-13": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-07-14": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-07-15": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-07-16": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-07-17": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-07-18": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-07-19": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-07-20": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-07-21": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-07-22": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-07-23": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-07-24": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-07-25": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-07-26": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-07-27": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-07-28": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-07-29": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-07-30": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-07-31": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-08-01": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-08-02": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-08-03": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-08-04": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-08-05": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-08-06": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-08-07": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-08-08": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-08-09": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-08-10": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-08-11": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-08-12": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-08-13": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-08-14": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-08-15": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-08-16": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-08-17": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-08-18": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-08-19": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-08-20": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-08-21": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-08-22": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-08-23": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-08-24": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-08-25": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-08-26": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-08-27": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-08-28": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-08-29": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-08-30": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-08-31": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-09-01": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-09-02": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-09-03": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-09-04": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-09-05": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-09-06": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-09-07": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-09-08": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-09-09": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-09-10": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-09-11": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-09-12": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-09-13": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-09-14": {
+      "nse_open": false,
+      "type": "NSE_HOLIDAY",
+      "description": "Ganesh Chaturthi",
+      "holiday_type": "TRADING_HOLIDAY"
+    },
+    "2026-09-15": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-09-16": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-09-17": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-09-18": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-09-19": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-09-20": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-09-21": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-09-22": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-09-23": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-09-24": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-09-25": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-09-26": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-09-27": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-09-28": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-09-29": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-09-30": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-10-01": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-10-02": {
+      "nse_open": false,
+      "type": "NSE_HOLIDAY",
+      "description": "Mahatma Gandhi Jayanti",
+      "holiday_type": "TRADING_HOLIDAY"
+    },
+    "2026-10-03": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-10-04": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-10-05": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-10-06": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-10-07": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-10-08": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-10-09": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-10-10": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-10-11": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-10-12": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-10-13": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-10-14": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-10-15": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-10-16": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-10-17": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-10-18": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-10-19": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-10-20": {
+      "nse_open": false,
+      "type": "NSE_HOLIDAY",
+      "description": "Dussehra",
+      "holiday_type": "TRADING_HOLIDAY"
+    },
+    "2026-10-21": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-10-22": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-10-23": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-10-24": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-10-25": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-10-26": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-10-27": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-10-28": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-10-29": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-10-30": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-10-31": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-11-01": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-11-02": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-11-03": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-11-04": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-11-05": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-11-06": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-11-07": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-11-08": {
+      "nse_open": true,
+      "type": "SPECIAL_OPEN",
+      "description": "Special Muhurat trading session",
+      "holiday_type": "SPECIAL_TRADING"
+    },
+    "2026-11-09": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-11-10": {
+      "nse_open": false,
+      "type": "NSE_HOLIDAY",
+      "description": "Diwali – Balipratipada",
+      "holiday_type": "TRADING_HOLIDAY"
+    },
+    "2026-11-11": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-11-12": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-11-13": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-11-14": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-11-15": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-11-16": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-11-17": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-11-18": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-11-19": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-11-20": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-11-21": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-11-22": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-11-23": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-11-24": {
+      "nse_open": false,
+      "type": "NSE_HOLIDAY",
+      "description": "Prakash Gurpurb Sri Guru Nanak Dev",
+      "holiday_type": "TRADING_HOLIDAY"
+    },
+    "2026-11-25": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-11-26": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-11-27": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-11-28": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-11-29": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-11-30": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-12-01": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-12-02": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-12-03": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-12-04": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-12-05": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-12-06": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-12-07": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-12-08": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-12-09": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-12-10": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-12-11": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-12-12": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-12-13": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-12-14": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-12-15": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-12-16": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-12-17": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-12-18": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-12-19": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-12-20": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-12-21": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-12-22": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-12-23": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-12-24": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-12-25": {
+      "nse_open": false,
+      "type": "NSE_HOLIDAY",
+      "description": "Christmas",
+      "holiday_type": "TRADING_HOLIDAY"
+    },
+    "2026-12-26": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Saturday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-12-27": {
+      "nse_open": false,
+      "type": "WEEKEND",
+      "description": "Sunday",
+      "holiday_type": "WEEKEND"
+    },
+    "2026-12-28": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-12-29": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-12-30": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    },
+    "2026-12-31": {
+      "nse_open": true,
+      "type": "TRADING_DAY",
+      "description": null,
+      "holiday_type": null
+    }
+  }
+}
