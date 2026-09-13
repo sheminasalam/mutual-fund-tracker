@@ -148,17 +148,59 @@ After installing the app and integration, follow the dashboard/card instructions
 
 ---
 
-# Importing your mutual-fund statement
+# Importing your mutual-fund portfolio
 
-The importer is intentionally conservative. Use a **fresh, detailed CAMS/KFintech consolidated statement**, preferably generated today. The statement coverage end date must be within the app's current 10-day import window.
+The portfolio import has **two separate stages**. Keep them separate:
 
-## The complete workflow at a glance
+1. **Generate a consolidated CAMS/KFintech statement** — this is done outside Mutual Fund Tracker using your mutual-fund statement provider.
+2. **Convert and import that statement into Mutual Fund Tracker** — this is done using the app and the supplied AI conversion workflow.
 
-**1. Open Import JSON** → **2. Copy the AI prompt** → **3. Generate a detailed consolidated statement** → **4. Remove the PDF password** → **5. Give the copied prompt + unlocked PDF to your AI assistant** → **6. Save the returned JSON** → **7. Import the JSON** → **8. Review the preview/warnings** → **9. Confirm the import**
+You do **not** need to open Mutual Fund Tracker before generating the consolidated statement. Start with Stage 1 below, then continue to the app for Stage 2.
 
 ---
 
-## Step 1 — Open Import JSON
+## Stage 1 — Generate a consolidated CAMS/KFintech statement
+
+Mutual Fund Tracker needs a recent, detailed consolidated statement from **CAMS or KFintech**. Generate this statement first, outside the app.
+
+The importer is intentionally conservative. Use a **fresh, detailed statement**, preferably generated today. The statement coverage end date must be within the app's current 10-day import window.
+
+### Recommended statement settings
+
+| Setting | Recommended value |
+|---|---|
+| **Statement type** | **Detailed** |
+| **Period** | **Specific Period** |
+| **From date** | **01-Jan-2000** |
+| **To date** | **Today's date** |
+| **Folio listing** | **Without zero balance folios** |
+| **Email** | Email linked to your mutual-fund account |
+| **PAN** | As requested by the statement provider |
+| **Password** | Only for downloading/generating the statement |
+
+![Recommended consolidated statement settings](mutual-fund-tracker-src/docs/images/cams-request-form.png)
+
+### Important: protect your statement password
+
+The statement password is only needed to generate/download the statement. **Do not send the CAMS/KFintech password to your AI assistant or to Mutual Fund Tracker.**
+
+After downloading the statement:
+
+1. Remove/unlock the PDF password locally.
+2. Keep the original password private.
+3. Upload only the unlocked PDF during Stage 2.
+
+### What you should have before continuing
+
+You should now have a **password-removed, detailed consolidated statement PDF** covering your complete portfolio history. Keep this PDF ready for the next stage.
+
+---
+
+## Stage 2 — Convert the statement and import it into Mutual Fund Tracker
+
+Now use the Mutual Fund Tracker app to prepare the AI conversion and import the resulting JSON.
+
+### Step 1 — Open Import JSON
 
 In the Mutual Fund Tracker web app:
 
@@ -167,9 +209,7 @@ In the Mutual Fund Tracker web app:
 
 ![Open Import JSON](mutual-fund-tracker-src/docs/images/import-menu.png)
 
----
-
-## Step 2 — Copy the exact AI conversion prompt
+### Step 2 — Copy the exact AI conversion prompt
 
 In the Import window, select **Copy AI conversion prompt**.
 
@@ -181,43 +221,9 @@ The prompt is also stored in the repository here:
 
 [AI import prompt](mutual-fund-tracker-src/AI_IMPORT_PROMPT.md)
 
----
+### Step 3 — Give the prompt and unlocked PDF to your AI assistant
 
-## Step 3 — Generate a consolidated CAMS/KFintech statement
-
-Use the consolidated statement service and request a **Detailed** statement covering a **Specific Period**.
-
-Recommended settings:
-
-| Setting | Value |
-|---|---|
-| **Statement type** | **Detailed** |
-| **Period** | **Specific Period** |
-| **From date** | **01-Jan-2000** |
-| **To date** | **Today's date** |
-| **Folio listing** | **Without zero balance folios** |
-| **Email** | Email linked to your mutual-fund account |
-| **PAN** | Optional, where supported |
-| **Password** | Any password chosen/required by the statement provider |
-
-![Recommended consolidated statement settings](mutual-fund-tracker-src/docs/images/cams-request-form.png)
-
-### Important password rule
-
-The statement password is only needed to generate/download the statement. **Do not send the CAMS/KFintech password to your AI assistant.**
-
-Before uploading the statement to an AI assistant:
-
-1. Download the statement.
-2. Remove/unlock the PDF password locally.
-3. Keep the original password private.
-4. Upload only the unlocked PDF.
-
----
-
-## Step 4 — Give the prompt and unlocked PDF to your AI assistant
-
-Start a new AI conversation, paste the copied Mutual Fund Tracker prompt, and upload the password-removed consolidated statement PDF.
+Start a new AI conversation, paste the copied Mutual Fund Tracker prompt, and upload the **password-removed consolidated statement PDF** you generated in Stage 1.
 
 ![Example AI upload](mutual-fund-tracker-src/docs/images/ai-upload-example.png)
 
@@ -225,9 +231,7 @@ Let the AI read the **complete statement** before asking it for the final JSON. 
 
 The AI is being used to **interpret the statement and format the data**. It should not invent missing transactions, alter financial values, or calculate current NAVs.
 
----
-
-## Step 5 — Save the generated JSON
+### Step 4 — Save the generated JSON
 
 Ask the AI to return the compact JSON required by Mutual Fund Tracker.
 
@@ -243,9 +247,7 @@ The schema is available here:
 
 [IMPORT_SCHEMA.json](mutual-fund-tracker-src/IMPORT_SCHEMA.json)
 
----
-
-## Step 6 — Import the JSON into Mutual Fund Tracker
+### Step 5 — Import the JSON into Mutual Fund Tracker
 
 1. Return to **Import JSON** in the app.
 2. Choose the generated `.json` file.
@@ -260,6 +262,10 @@ Treat AI-generated JSON as **untrusted input**. The application validates it bef
 For detailed import behavior, see the [complete application guide](mutual-fund-tracker-src/README.md).
 
 ---
+
+## Import workflow at a glance
+
+**Generate statement → Remove PDF password → Open Import JSON → Copy AI prompt → Upload unlocked PDF to AI → Save JSON → Import JSON → Review warnings/preview → Confirm**
 
 # What Home Assistant entities are provided?
 
