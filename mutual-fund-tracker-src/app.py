@@ -42,6 +42,7 @@ ALLOWED_REFRESH_SECONDS = (300, 900, 1800, 3600, 7200, 21600, 43200, 86400)
 NAV_RETRY_ATTEMPTS = 5
 NAV_RETRY_DELAY_SECONDS = 5
 NAV_REQUEST_SPACING_SECONDS = 0.5
+AMFI_HISTORY_CACHE_REVALIDATION_SECONDS = 3600
 AUTO_REFRESH_RETRY_COUNT = 5
 AUTO_REFRESH_RETRY_DELAY_SECONDS = 120
 AMFI_NAV_URLS = [
@@ -3462,7 +3463,7 @@ class Tracker:
                 stored_execution_date = parse_optional_date(row['execution_date'])
                 include = bool(stored_execution_date and stored_execution_date.isoformat() == today_iso)
 
-                # Compatibility for live rows created before v1.0.0. Those rows
+                # Compatibility for live rows created before v0.1.247. Those rows
                 # could store the calendar execution date (for example 26-Aug) even
                 # though a delayed 25-Aug SIP executed before 23:00 on 26-Aug belongs
                 # to the current logical 25-Aug reporting window. Keep such an existing
@@ -5082,44 +5083,119 @@ class Tracker:
             snapshot[code] = (nav_date, nav)
         return snapshot
 
-    def _amfi_history_snapshot_for_date(self, target_date):
-        """Return/cache the AMFI historical report for one date."""
+    def _amfi_history_snapshot_for_date(self, target_date, required_scheme_code=None):
+        """Return/cache the AMFI historical report for one date.
+
+        A cached historical file is normally permanent, but a previously cached
+        partial/invalid report must not permanently hide a scheme that is present
+        in the current AMFI report. When a caller requires a specific scheme and
+        the cached snapshot does not contain a NAV for the requested date, re-fetch
+        that date from AMFI once per revalidation interval and replace the cache.
+        """
         if not hasattr(self, '_amfi_history_snapshot_lock'):
             self._amfi_history_snapshot_lock = threading.Lock()
             self._amfi_history_snapshot_cache = {}
+            self._amfi_history_cache_revalidated_at = {}
+            self._amfi_history_cache_revalidation_failed_at = {}
+        elif not hasattr(self, '_amfi_history_cache_revalidated_at'):
+            self._amfi_history_cache_revalidated_at = {}
+        if not hasattr(self, '_amfi_history_cache_revalidation_failed_at'):
+            self._amfi_history_cache_revalidation_failed_at = {}
         target = parse_optional_date(target_date)
         if not target:
             raise ValueError('Historical AMFI date is required')
         key = target.isoformat()
+        required_code = str(required_scheme_code or '').strip()
+        now = time.monotonic()
+        cache_needs_revalidation = False
         with self._amfi_history_snapshot_lock:
             cached = self._amfi_history_snapshot_cache.get(key)
             if cached is not None:
-                return dict(cached)
+                if not required_code:
+                    return dict(cached)
+                cached_record = cached.get(required_code)
+                if cached_record is not None and cached_record[0] == target:
+                    return dict(cached)
+                last_revalidated = self._amfi_history_cache_revalidated_at.get(key, 0.0)
+                last_revalidation_failed = self._amfi_history_cache_revalidation_failed_at.get(key, 0.0)
+                cache_needs_revalidation = (last_revalidated <= 0.0 or (now - last_revalidated) >= AMFI_HISTORY_CACHE_REVALIDATION_SECONDS)
+                if not cache_needs_revalidation:
+                    if last_revalidation_failed > 0.0 and (now - last_revalidation_failed) < AMFI_HISTORY_CACHE_REVALIDATION_SECONDS:
+                        raise RuntimeError(f'AMFI historical cache revalidation failed for {key}; refusing to use an incomplete cached report for scheme {required_code}')
+                    return dict(cached)
+
         cache_dir = DATA_DIR / 'amfi_nav_history_v2'
         cache_dir.mkdir(parents=True, exist_ok=True)
         cache_path = cache_dir / f'{key}.txt'
         raw = None
+        cached_snapshot = None
         if cache_path.exists():
             try:
                 raw = cache_path.read_text(encoding='utf-8-sig')
+                if raw and len(raw.strip()) >= 50:
+                    try:
+                        cached_snapshot = self._parse_amfi_history_text(raw)
+                    except Exception:
+                        cached_snapshot = None
             except Exception:
                 raw = None
-        if not raw or len(raw.strip()) < 50:
+
+        if cached_snapshot:
+            if not required_code:
+                with self._amfi_history_snapshot_lock:
+                    self._amfi_history_snapshot_cache[key] = dict(cached_snapshot)
+                return dict(cached_snapshot)
+            cached_record = cached_snapshot.get(required_code)
+            if cached_record is not None and cached_record[0] == target:
+                with self._amfi_history_snapshot_lock:
+                    self._amfi_history_snapshot_cache[key] = dict(cached_snapshot)
+                return dict(cached_snapshot)
+            with self._amfi_history_snapshot_lock:
+                last_revalidated = self._amfi_history_cache_revalidated_at.get(key, 0.0)
+                last_revalidation_failed = self._amfi_history_cache_revalidation_failed_at.get(key, 0.0)
+                if last_revalidated > 0.0 and (time.monotonic() - last_revalidated) < AMFI_HISTORY_CACHE_REVALIDATION_SECONDS:
+                    self._amfi_history_snapshot_cache[key] = dict(cached_snapshot)
+                    if last_revalidation_failed > 0.0 and (time.monotonic() - last_revalidation_failed) < AMFI_HISTORY_CACHE_REVALIDATION_SECONDS:
+                        raise RuntimeError(f'AMFI historical cache revalidation failed for {key}; refusing to use an incomplete cached report for scheme {required_code}')
+                    return dict(cached_snapshot)
+                self._amfi_history_cache_revalidated_at[key] = time.monotonic()
+            _LOGGER.warning(
+                'AMFI history cache for %s does not contain scheme %s; re-fetching the historical report',
+                key, required_code
+            )
+            raw = None
+
+        if not raw or len(raw.strip()) < 50 or cache_needs_revalidation or (required_code and cached_snapshot is None):
             url = f'https://portal.amfiindia.com/DownloadNAVHistoryReport_Po.aspx?frmdt={target.strftime("%d-%b-%Y")}'
             try:
                 raw = request_bytes(url, timeout=HTTP_TIMEOUT, retries=HTTP_RETRIES).decode('utf-8-sig', errors='replace')
             except Exception as exc:
+                with self._amfi_history_snapshot_lock:
+                    self._amfi_history_cache_revalidation_failed_at[key] = time.monotonic()
                 raise RuntimeError(f'AMFI historical NAV fetch failed for {target.isoformat()}: {exc}')
             if not raw.strip():
+                with self._amfi_history_snapshot_lock:
+                    self._amfi_history_cache_revalidation_failed_at[key] = time.monotonic()
                 raise RuntimeError(f'AMFI historical NAV file is empty for {target.isoformat()}')
             try:
-                cache_path.write_text(raw, encoding='utf-8')
+                cache_tmp = cache_path.with_suffix('.tmp')
+                cache_tmp.write_text(raw, encoding='utf-8')
+                cache_tmp.replace(cache_path)
             except Exception:
                 pass
-        snapshot = self._parse_amfi_history_text(raw)
+
+        try:
+            snapshot = self._parse_amfi_history_text(raw)
+        except Exception as exc:
+            with self._amfi_history_snapshot_lock:
+                self._amfi_history_cache_revalidation_failed_at[key] = time.monotonic()
+            raise RuntimeError(f'AMFI historical NAV file parse failed for {target.isoformat()}: {exc}')
         if not snapshot:
+            with self._amfi_history_snapshot_lock:
+                self._amfi_history_cache_revalidation_failed_at[key] = time.monotonic()
             raise RuntimeError(f'AMFI historical NAV file contains no usable rows for {target.isoformat()}')
         with self._amfi_history_snapshot_lock:
+            self._amfi_history_cache_revalidation_failed_at.pop(key, None)
             self._amfi_history_snapshot_cache[key] = dict(snapshot)
         return dict(snapshot)
 
@@ -5153,10 +5229,7 @@ class Tracker:
                 return (None, None)
             if self._holiday_status(candidate).get('nse_open'):
                 eligible_checks += 1
-                try:
-                    snap = self._amfi_history_snapshot_for_date(candidate)
-                except Exception:
-                    raise
+                snap = self._amfi_history_snapshot_for_date(candidate, required_scheme_code=code)
                 record = snap.get(code)
                 if record and record[0] == candidate:
                     return candidate, float(record[1])
@@ -5197,7 +5270,7 @@ class Tracker:
     def _nav_reference(self, scheme_code):
         return self.db.nav_reference(scheme_code)
 
-    def update_nav_reference_table(self, latest_snapshot, scheme_codes=None):
+    def update_nav_reference_table(self, latest_snapshot, scheme_codes=None, continue_on_error=False):
         """Atomically update complete reference records for owned schemes only."""
         if not hasattr(self, '_nav_reference_lock'):
             self._nav_reference_lock = threading.Lock()
@@ -5257,13 +5330,21 @@ class Tracker:
                         })
                         continue
 
-                # Compute every pending record before writing anything. If a required AMFI
-                # history download fails, nothing from this update cycle is committed.
-                record = self._compute_nav_reference(code, latest_record)
-                for field in ('previous_nav_date', 'month_nav_date', 'year_nav_date'):
-                    if record.get(field) is None or record.get(field.replace('_date', '')) is None:
-                        raise RuntimeError(f'AMFI reference NAV unavailable for scheme {code}: {field}')
-                updates.append(record)
+                # Compute every pending record before writing anything. A single
+                # scheme may fail because its AMFI history is temporarily unavailable;
+                # when requested by a full portfolio refresh, isolate that scheme and
+                # continue so unrelated schemes can still update.
+                try:
+                    record = self._compute_nav_reference(code, latest_record)
+                    for field in ('previous_nav_date', 'month_nav_date', 'year_nav_date'):
+                        if record.get(field) is None or record.get(field.replace('_date', '')) is None:
+                            raise RuntimeError(f'AMFI reference NAV unavailable for scheme {code}: {field}')
+                    updates.append(record)
+                except Exception as exc:
+                    if not continue_on_error:
+                        raise
+                    _LOGGER.warning('AMFI reference update skipped for scheme %s: %s', code, exc)
+                    continue
 
             if updates:
                 self.db.upsert_nav_references_atomic(updates)
@@ -5831,7 +5912,11 @@ class Tracker:
                 _refresh_state(stage='Downloading latest NAV snapshot', progress=5,
                                message='Fetching the latest NAV snapshot for all schemes…')
                 latest_snapshot = self.request_latest_nav_snapshot(force=True)
-                self.update_nav_reference_table(latest_snapshot, scheme_codes=grouped_funds.keys())
+                self.update_nav_reference_table(
+                    latest_snapshot,
+                    scheme_codes=grouped_funds.keys(),
+                    continue_on_error=True,
+                )
 
                 for scheme_code, scheme_funds in grouped_funds.items():
                     first_fund = scheme_funds[0]
@@ -5863,7 +5948,11 @@ class Tracker:
                 _refresh_state(stage='Downloading latest NAV snapshot', progress=5,
                                message='Fetching the latest NAV snapshot for all schemes…')
                 latest_snapshot = self.request_latest_nav_snapshot(force=True)
-                self.update_nav_reference_table(latest_snapshot, scheme_codes=grouped_funds.keys())
+                self.update_nav_reference_table(
+                    latest_snapshot,
+                    scheme_codes=grouped_funds.keys(),
+                    continue_on_error=True,
+                )
                 for scheme_code, scheme_funds in grouped_funds.items():
                     first_fund = scheme_funds[0]
                     pct_before = int((processed_unique / total_unique) * 90)
@@ -6866,7 +6955,7 @@ def read_json(handler):
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = 'MFT/1.0.0'
+    server_version = 'MFT/0.1.247'
 
     def log_message(self, fmt, *args):
         print(f'[{iso_now()}] {fmt % args}', flush=True)
