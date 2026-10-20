@@ -1,5 +1,14 @@
 # Changelog
 
+## v1.0.2
+- Security: Export Portfolio PNG no longer writes to `/config/www` (publicly served at `/local/`). Exports are stored in `/config/mutual_fund_tracker/exports/`, served only through an authenticated endpoint or short-lived signed link, with random file names and 24-hour retention. The integration validates the app's export result (exact expected file, no symlinks, PNG only) before copying it.
+- Exports are serialized (one at a time), the export request and result files are written atomically, and the integration tolerates a briefly incomplete result file. The download endpoint rejects symlinks and anything outside the export folder.
+- The add-on now creates the shared export folder and PNG owner-only (0700/0600) and the integration deletes the shared copy as soon as it has been moved.
+- Fixed "Invalid config for 'mutual_fund_tracker' ... is an invalid option" errors for every top-level `configuration.yaml` key: the integration now uses `cv.config_entry_only_config_schema` instead of an empty schema that rejected unrelated YAML keys.
+- New `mutual_fund_tracker_export_ready` event with `path` and `signed_url` for Telegram, email and Node-RED automations.
+- The Lovelace card is registered automatically; no manual dashboard resource needed.
+- Integration `iot_class` is now `local_polling`; removed stray citation markers from the README.
+
 ## v1.0.0
 - First stable release.
 - Includes the complete Mutual Fund Tracker Home Assistant app, Home Assistant integration, custom Lovelace card, CAMS/KFintech AI-assisted import workflow, SIP/NAV processing, and current AMFI NAV handling.

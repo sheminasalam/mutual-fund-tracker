@@ -2,7 +2,7 @@
 
 **User Guide and Import Procedure**
 
-*Stable release: v1.0.0*
+*Stable release: v1.0.2*
 
 | **INDIA ONLY:** Mutual Fund Tracker is designed specifically for Indian mutual funds and the Indian market. It uses Indian mutual-fund data, Indian NAVs, SIP conventions, CAMS/KFintech consolidated statements, NSE trading-day/holiday information, Asia/Kolkata (IST), and the NIFTY 50. It is not designed for funds, markets, currencies, tax rules, or statements from other countries. |
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

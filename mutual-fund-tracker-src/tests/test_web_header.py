@@ -169,11 +169,11 @@ class WebHeaderTests(unittest.TestCase):
     assert 'first_sip_date:first' in JS
  def test_legacy_version_metadata(self):
     assert '# v0.1.163' in CHANGELOG
-    assert 'version: "1.0.0"' in CONFIG
+    assert 'version: "1.0.2"' in CONFIG
     assert '# v0.1.171' in CHANGELOG
 
  def test_current_version_metadata_secondary(self):
-    assert '1.0.0' in MANIFEST
+    assert '1.0.2' in MANIFEST
     assert '# v0.1.171' in CHANGELOG
     assert '0.1.163' not in MANIFEST
 
@@ -234,7 +234,7 @@ class AddMutualFundLumpsumWebTests(unittest.TestCase):
 
  def test_legacy_version_metadata_secondary(self):
     assert '# v0.1.163' in CHANGELOG
-    assert '1.0.0' in APP
+    assert '1.0.2' in APP
     assert '0.1.163' not in APP
 
 

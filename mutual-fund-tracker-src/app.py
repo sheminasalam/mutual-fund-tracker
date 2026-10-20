@@ -6092,6 +6092,9 @@ class Tracker:
         if not safe_name.lower().endswith('.png'):
             safe_name += '.png'
         self._export_dir.mkdir(parents=True, exist_ok=True)
+        # /share is visible to other add-ons: keep the export folder and images
+        # owner-only so unprivileged add-ons cannot read a portfolio snapshot.
+        os.chmod(self._export_dir, 0o700)
         target = self._export_dir / safe_name
         tmp = target.with_suffix('.tmp.png')
 
@@ -6279,8 +6282,16 @@ class Tracker:
              f"Exported {export_now.strftime('%-d/%-m/%Y, %-I:%M:%S %p')} · {len(rows)} funds",
              f_footer, '#667085', 'la')
 
-        img.save(tmp, format='PNG', optimize=True)
-        tmp.replace(target)
+        fd = os.open(tmp, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+        try:
+            os.fchmod(fd, 0o600)
+            with os.fdopen(fd, 'wb') as handle:
+                fd = None
+                img.save(handle, format='PNG', optimize=True)
+        finally:
+            if fd is not None:
+                os.close(fd)
+        os.replace(tmp, target)
         return str(target)
 
     def _export_request_loop(self):
@@ -6294,7 +6305,7 @@ class Tracker:
                             self._export_request_path.unlink()
                         except FileNotFoundError:
                             pass
-                    request_id = str(request.get('request_id') or uuid.uuid4().hex)
+                    request_id = re.sub(r'[^0-9a-fA-F]', '', str(request.get('request_id') or '')) or uuid.uuid4().hex
                     result_path = self._export_dir / f'export_result_{request_id}.json'
                     try:
                         with self._export_lock:
@@ -6303,7 +6314,11 @@ class Tracker:
                     except Exception as exc:
                         result = {'status': 'error', 'request_id': request_id, 'error': str(exc), 'updated_at': iso_now()}
                     self._export_dir.mkdir(parents=True, exist_ok=True)
-                    result_path.write_text(json.dumps(result), encoding='utf-8')
+                    os.chmod(self._export_dir, 0o700)
+                    # Write atomically so the integration never reads a half-written result.
+                    result_tmp = result_path.with_name(result_path.name + '.tmp')
+                    result_tmp.write_text(json.dumps(result), encoding='utf-8')
+                    os.replace(result_tmp, result_path)
             except Exception:
                 pass
             time.sleep(0.5)

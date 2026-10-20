@@ -1,5 +1,5 @@
 name: "Mutual Fund Tracker"
-version: "1.0.0"
+version: "1.0.2"
 slug: "mutual_fund_tracker"
 description: "Track Indian mutual funds, SIPs, NAV-based valuation and XIRR directly in Home Assistant."
 url: "https://github.com/sheminasalam/mutual-fund-tracker"

@@ -1,18 +1,33 @@
 from __future__ import annotations
 
+import asyncio
 import json
-import shutil
+import os
 import time
 import uuid
+from datetime import timedelta
 from pathlib import Path
 
+from homeassistant.components.http.auth import async_sign_path
 from homeassistant.components.button import ButtonEntity
 from homeassistant.helpers.device_registry import DeviceInfo
 from homeassistant.helpers.entity import EntityCategory
+from homeassistant.helpers.network import NoURLAvailableError, get_url
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
-from .const import DOMAIN, EXPORT_REQUEST_FILE, EXPORT_SHARE_DIR, HA_EXPORT_DIR, REFRESH_REQUEST_FILE
+from .const import (
+    DOMAIN,
+    EXPORT_EVENT,
+    EXPORT_RETENTION_SECONDS,
+    EXPORT_REQUEST_FILE,
+    EXPORT_SHARE_DIR,
+    EXPORT_SIGNED_URL_TTL_SECONDS,
+    EXPORT_SUBDIR,
+    EXPORT_URL_BASE,
+    REFRESH_REQUEST_FILE,
+)
 from .entity_identity import investor_entity_key
+from .export_utils import UnsafeExportError, prune_exports, read_validated_export, write_text_atomic
 
 
 async def async_setup_entry(hass, entry, async_add_entities):
@@ -89,41 +104,95 @@ class MutualFundExportButton(CoordinatorEntity, ButtonEntity):
         )
 
     async def async_press(self) -> None:
-        await self.hass.async_add_executor_job(self._export_and_publish)
+        target_dir = Path(self.hass.config.path(*EXPORT_SUBDIR))
+        # One export at a time: the app has a single request file, so the whole
+        # request -> result -> copy exchange must not interleave.
+        lock = self.hass.data.setdefault(DOMAIN, {}).setdefault("_export_lock", asyncio.Lock())
+        async with lock:
+            target = await self.hass.async_add_executor_job(self._export_and_publish, target_dir)
+        # Authenticated, time-limited link (works with Nabu Casa / tunnels).
+        signed_path = async_sign_path(
+            self.hass,
+            f"{EXPORT_URL_BASE}/{target.name}",
+            timedelta(seconds=EXPORT_SIGNED_URL_TTL_SECONDS),
+        )
+        # Prefer the externally reachable URL (Nabu Casa / configured external
+        # URL) so Node-RED and other external services can fetch the image.
+        scope = "external"
+        try:
+            base = get_url(self.hass, allow_internal=False, prefer_external=True)
+        except NoURLAvailableError:
+            try:
+                base, scope = get_url(self.hass, allow_external=False), "internal"
+            except NoURLAvailableError:
+                base, scope = "", "relative"
+        signed_url = f"{base}{signed_path}"
+        self.hass.bus.async_fire(
+            EXPORT_EVENT,
+            {
+                "investor": self._investor_name,
+                "entity_key": self._entity_key,
+                "file_name": target.name,
+                "path": str(target),
+                "signed_url": signed_url,
+                "signed_url_scope": scope,
+                "signed_url_expires_in": EXPORT_SIGNED_URL_TTL_SECONDS,
+            },
+        )
 
-    def _export_and_publish(self) -> None:
+    @staticmethod
+    def _withdraw_request(request_path: Path, request_id: str) -> None:
+        """Remove our unprocessed request so it cannot run later unnoticed."""
+        try:
+            if json.loads(request_path.read_text(encoding="utf-8")).get("request_id") == request_id:
+                request_path.unlink()
+        except (OSError, ValueError):
+            pass
+
+    def _export_and_publish(self, target_dir: Path) -> Path:
         request_id = uuid.uuid4().hex
-        safe = "".join(c.lower() if c.isalnum() else "-" for c in self._investor_name).strip("-") or f"investor-{self._profile_id}"
-        output_name = f"{safe}-mutual-fund-analysis.png"
+        # Opaque, per-export names: no investor name on disk, and an old link can
+        # never show a newer export.
+        output_name = f"export-{request_id}.png"
         share_dir = Path(EXPORT_SHARE_DIR)
         result_path = share_dir / f"export_result_{request_id}.json"
         request_path = Path(EXPORT_REQUEST_FILE)
-        target_dir = Path(HA_EXPORT_DIR)
         target_dir.mkdir(parents=True, exist_ok=True)
+        os.chmod(target_dir, 0o700)
+        prune_exports(target_dir, share_dir, EXPORT_RETENTION_SECONDS)
         target = target_dir / output_name
         try:
-            if target.exists():
-                target.unlink()
-            if result_path.exists():
-                result_path.unlink()
             request_path.parent.mkdir(parents=True, exist_ok=True)
-            request_path.write_text(json.dumps({
+            write_text_atomic(request_path, json.dumps({
                 "request_id": request_id,
                 "profile_id": int(self._profile_id),
                 "output_name": output_name,
-            }), encoding="utf-8")
+            }))
             deadline = time.monotonic() + 45
             while time.monotonic() < deadline:
                 if result_path.exists():
-                    result = json.loads(result_path.read_text(encoding="utf-8"))
+                    try:
+                        result = json.loads(result_path.read_text(encoding="utf-8"))
+                    except (json.JSONDecodeError, UnicodeDecodeError):
+                        # Transient/partial write: try again rather than failing.
+                        time.sleep(0.5)
+                        continue
                     if result.get("status") == "completed":
-                        source = Path(result["path"])
-                        if not source.exists():
-                            raise RuntimeError("Mutual Fund Tracker created the PNG but it could not be found")
-                        shutil.copy2(source, target)
-                        return
+                        try:
+                            data = read_validated_export(str(result.get("path", "")), share_dir, output_name)
+                        except UnsafeExportError as err:
+                            raise RuntimeError(f"Rejected PNG export result: {err}") from err
+                        fd = os.open(target, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+                        with os.fdopen(fd, "wb") as out:
+                            out.write(data)
+                        try:
+                            (share_dir / output_name).unlink()
+                        except OSError:
+                            pass
+                        return target
                     raise RuntimeError(result.get("error") or "PNG export failed")
                 time.sleep(0.5)
+            self._withdraw_request(request_path, request_id)
             raise RuntimeError("Timed out waiting for Mutual Fund Tracker to create the PNG")
         finally:
             try:

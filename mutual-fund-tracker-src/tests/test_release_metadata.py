@@ -5,7 +5,7 @@ ROOT = Path(__file__).resolve().parents[1]
 def test_app_is_not_marked_experimental():
     cfg = (ROOT / "config.yaml").read_text()
     assert "stage: experimental" not in cfg
-    assert 'version: "1.0.0"' in cfg
+    assert 'version: "1.0.2"' in cfg
 
 
 def test_add_investor_is_menu_action():
@@ -26,5 +26,11 @@ def test_readme_covers_card_nifty_nse_dark_mode():
 
 def test_custom_integration_manifest_version_matches_release():
     manifest = (ROOT.parent / 'custom_components' / 'mutual_fund_tracker' / 'manifest.json').read_text()
-    assert '"version": "1.0.0"' in manifest
+    assert '"version": "1.0.2"' in manifest
 
+
+
+def test_config_schema_does_not_reject_other_yaml_keys():
+    init = (Path(__file__).resolve().parents[2] / 'custom_components' / 'mutual_fund_tracker' / '__init__.py').read_text()
+    assert 'vol.Schema({})' not in init
+    assert 'CONFIG_SCHEMA = cv.config_entry_only_config_schema(DOMAIN)' in init

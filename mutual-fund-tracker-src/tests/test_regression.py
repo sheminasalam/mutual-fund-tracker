@@ -909,6 +909,19 @@ class ExportAndSerializationTests(TrackerTestBase):
             self.assertGreater(image.width, 500)
             self.assertGreater(image.height, 200)
 
+    def test_png_export_is_owner_only(self):
+        import stat as _stat
+        fid = self.add_fund(sip_day=13, sip_amount=1000, enabled=True)
+        self.db.update_nav(fid, {
+            'last_nav': 100, 'last_nav_date': '2026-08-14', 'previous_nav': 99,
+            'previous_nav_date': '2026-08-13', 'month_nav': 95, 'month_nav_date': '2026-08-01',
+            'year_nav': 80, 'year_nav_date': '2026-01-01', 'last_refresh': app.iso_now(), 'last_error': None,
+        })
+        path = Path(self.tracker.export_portfolio_png(1, 'private.png'))
+        self.assertEqual(0o600, _stat.S_IMODE(path.stat().st_mode))
+        self.assertEqual(0o700, _stat.S_IMODE(path.parent.stat().st_mode))
+        self.assertEqual([], list(path.parent.glob('*.tmp.png')))
+
 
 class ImportSipGapReconciliationTests(TrackerTestBase):
     def test_current_latest_nav_sip_is_auto_reconciled_and_live(self):

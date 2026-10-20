@@ -286,7 +286,10 @@ def test_card_static_resource_registration():
     assert static_logo.exists()
     assert static_card.read_text() == (ROOT / 'www' / 'mutual-fund-tracker-card.js').read_text()
     assert 'async_register_static_paths' in init_text
-    assert '/api/mutual_fund_tracker/mutual-fund-tracker-card.js' in init_text
+    const_text = (ROOT.parent / 'custom_components' / 'mutual_fund_tracker' / 'const.py').read_text()
+    assert '/api/mutual_fund_tracker/mutual-fund-tracker-card.js' in const_text
+    assert 'CARD_URL' in init_text
+    assert 'add_extra_js_url' in init_text
     assert '/api/mutual_fund_tracker/mutual-fund-tracker-logo.png' in init_text
     assert 'StaticPathConfig' in init_text
 

@@ -5,16 +5,30 @@ import logging
 from datetime import timedelta
 from pathlib import Path
 
+from homeassistant.components.frontend import add_extra_js_url
 from homeassistant.components.http import StaticPathConfig
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.device_registry import async_get as async_get_device_registry
+from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers import entity_registry as er
+from homeassistant.loader import async_get_integration
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
-import voluptuous as vol
 
-from .const import DOMAIN, STATE_FILES, UPDATE_INTERVAL_SECONDS, INTEGRATION_RELOAD_ACK_FILE
+from .const import (
+    CARD_URL,
+    DOMAIN,
+    EXPORT_RETENTION_SECONDS,
+    EXPORT_SHARE_DIR,
+    EXPORT_SUBDIR,
+    INTEGRATION_RELOAD_ACK_FILE,
+    LEGACY_WWW_SUBDIR,
+    STATE_FILES,
+    UPDATE_INTERVAL_SECONDS,
+)
+from .export_utils import prune_exports
+from .export_view import MutualFundExportView
 
 # Pre-import platform modules at module load time so Home Assistant does not
 # need to import them synchronously while forwarding config-entry platforms.
@@ -23,7 +37,9 @@ from .entity_identity import investor_entity_key
 
 _LOGGER = logging.getLogger(__name__)
 PLATFORMS: list[Platform] = [Platform.SENSOR, Platform.BINARY_SENSOR, Platform.BUTTON]
-CONFIG_SCHEMA = vol.Schema({})
+# Config-entry-only integration. The schema is applied to the *whole*
+# configuration.yaml, so it must not reject unrelated top-level keys.
+CONFIG_SCHEMA = cv.config_entry_only_config_schema(DOMAIN)
 
 
 async def async_setup(hass: HomeAssistant, config: dict) -> bool:
@@ -34,7 +50,7 @@ async def async_setup(hass: HomeAssistant, config: dict) -> bool:
     static_paths = []
     if card_path.exists():
         static_paths.append(StaticPathConfig(
-            "/api/mutual_fund_tracker/mutual-fund-tracker-card.js",
+            CARD_URL,
             str(card_path),
             False,
         ))
@@ -50,9 +66,28 @@ async def async_setup(hass: HomeAssistant, config: dict) -> bool:
         _LOGGER.warning("Mutual Fund Tracker logo file is missing: %s", logo_path)
     if static_paths:
         await hass.http.async_register_static_paths(static_paths)
-    else:
-        _LOGGER.warning("Mutual Fund Tracker custom card file is missing: %s", card_path)
+    hass.http.register_view(MutualFundExportView(hass))
+    if card_path.exists():
+        # Loads the card on every dashboard automatically; no manual
+        # "Dashboard resource" entry is needed. ?v= busts the browser cache.
+        integration = await async_get_integration(hass, DOMAIN)
+        add_extra_js_url(hass, f"{CARD_URL}?v={integration.version}")
     return True
+
+
+def _remove_legacy_public_exports(www_dir: Path) -> None:
+    """Delete PNGs older releases left in /config/www (served unauthenticated)."""
+    if not www_dir.is_dir():
+        return
+    for png in www_dir.glob("*-mutual-fund-analysis.png"):
+        try:
+            png.unlink()
+        except OSError:
+            _LOGGER.warning("Could not remove legacy public export %s; delete it manually", png)
+    try:
+        www_dir.rmdir()  # only succeeds if empty
+    except OSError:
+        pass
 
 
 async def _migrate_profit_pct_entity_ids(hass: HomeAssistant) -> None:
@@ -227,6 +262,15 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     coordinator.async_add_listener(_schedule_registry_cleanup)
     await _cleanup_legacy_investor_entities(hass, coordinator)
     await _migrate_profit_pct_entity_ids(hass)
+    await hass.async_add_executor_job(
+        _remove_legacy_public_exports, Path(hass.config.path(*LEGACY_WWW_SUBDIR))
+    )
+    await hass.async_add_executor_job(
+        prune_exports,
+        Path(hass.config.path(*EXPORT_SUBDIR)),
+        Path(EXPORT_SHARE_DIR),
+        EXPORT_RETENTION_SECONDS,
+    )
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
     return True
 

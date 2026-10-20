@@ -1,5 +1,5 @@
 /* Mutual Fund Tracker — Home Assistant custom Lovelace card.
- * The card is intentionally self-contained so it can be served from /local/.
+ * The card is intentionally self-contained so it can be served as a single static file.
  */
 (() => {
   const CARD_TYPE = 'mutual-fund-tracker-card';

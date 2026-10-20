@@ -6,7 +6,7 @@ Mutual Fund Tracker combines a Home Assistant app with a dedicated Home Assistan
 
 > **India only.** The project is designed for Indian mutual funds, CAMS/KFintech statements, AMFI NAV data, NSE trading-day information and Asia/Kolkata (IST).
 
-**Current stable release: v1.0.0**
+**Current stable release: v1.0.2**
 
 ---
 
@@ -72,7 +72,7 @@ https://github.com/sheminasalam/mutual-fund-tracker
 9. After installation finishes, select **Start**.
 10. Open the app's **Web UI**.
 
-Home Assistant app repositories are identified by a root `repository.yaml` file; this repository includes one. Home Assistant's current documentation uses **Settings → Apps → Install app → ⋮ → Repositories** for adding third-party app repositories. citeturn721807search0turn721807search1
+Home Assistant app repositories are identified by a root `repository.yaml` file; this repository includes one. Home Assistant's current documentation uses **Settings → Apps → Install app → ⋮ → Repositories** for adding third-party app repositories. 
 
 ### What should happen
 
@@ -112,7 +112,7 @@ custom_components/mutual_fund_tracker/
 13. Search for **Mutual Fund Tracker**.
 14. Complete the integration setup.
 
-HACS requires public GitHub repositories to have a README and a root `hacs.json`; when releases are used, the published GitHub release tag is used as the remote version. This repository contains both. citeturn240473search0
+HACS requires public GitHub repositories to have a README and a root `hacs.json`; when releases are used, the published GitHub release tag is used as the remote version. This repository contains both. 
 
 ### After installation
 
@@ -140,11 +140,71 @@ Then restart Home Assistant and add the integration from **Settings → Devices 
 
 ## 3. Add the Mutual Fund Tracker dashboard card
 
-The repository includes the custom Lovelace card used by the project. The integration exposes the necessary Home Assistant-side data for the card.
+The card is bundled with the integration and **registered automatically** when the integration loads — there is no dashboard resource to add by hand. After installing and restarting Home Assistant (and a browser hard-refresh):
 
-After installing the app and integration, follow the dashboard/card instructions in the integration documentation:
+1. Open a dashboard and choose **Edit dashboard → + Add card**.
+2. Search for **Mutual Fund Tracker** and select it.
 
-[Home Assistant integration guide](custom_components/mutual_fund_tracker/README.md)
+Or add it in YAML:
+
+```yaml
+type: custom:mutual-fund-tracker-card
+```
+
+If the card does not appear in the picker on your setup, add it manually under **Settings → Dashboards → Resources** (the integration's automatic loading is skipped if the same URL is already registered by hand). If you prefer to manage it as a dashboard resource yourself, the file is served at `/api/mutual_fund_tracker/mutual-fund-tracker-card.js` (resource type: *JavaScript module*).
+
+---
+
+## 4. Exporting the portfolio PNG (email / Telegram / Node-RED)
+
+Pressing **Export Portfolio PNG** saves a snapshot to a private folder:
+
+```text
+/config/mutual_fund_tracker/exports/export-<random>.png
+```
+
+The folder is deliberately **not** under `/config/www`, so nothing is served without authentication. Each export gets a new random file name (no investor name), so an old link can never show a newer export. Exports are deleted automatically after **24 hours**. While the add-on renders the image it briefly sits in `/share/mutual_fund_tracker/exports/` (owner-only permissions, removed as soon as the integration has moved it).
+
+When an export finishes, the integration fires the event `mutual_fund_tracker_export_ready`:
+
+| Field | Meaning |
+|---|---|
+| `investor` | Investor name |
+| `file_name` / `path` | Random file name and full path on disk |
+| `signed_url` | Authenticated link to the image |
+| `signed_url_scope` | `external`, `internal` or `relative` (see below) |
+| `signed_url_expires_in` | Link lifetime in seconds (3600) |
+
+**Which to use**
+
+- **Local file `path` (recommended for HA actions).** Reliable for Telegram and email. Add the folder to `allowlist_external_dirs` and restart:
+
+  ```yaml
+  homeassistant:
+    allowlist_external_dirs:
+      - /config/mutual_fund_tracker/exports
+  ```
+
+- **`signed_url` (for Node-RED / external services).** It uses your configured *external* URL (or Nabu Casa) when available, otherwise the internal URL, otherwise a relative path; check `signed_url_scope` before sending it outside your network. A service outside your network (for example Telegram's servers fetching a `url`) can only use the link when the scope is `external`; with `internal` or `relative` it cannot reach your instance, so send the local `path` instead. It is valid for **1 hour** and stops working when Home Assistant restarts. For anything longer-lived, send the file itself instead.
+
+Example automation:
+
+```yaml
+automation:
+  - alias: Send portfolio PNG to Telegram
+    triggers:
+      - trigger: event
+        event_type: mutual_fund_tracker_export_ready
+    actions:
+      - action: telegram_bot.send_photo
+        data:
+          file: "{{ trigger.event.data.path }}"
+          caption: "{{ trigger.event.data.investor }} portfolio"
+```
+
+Email works the same way with `images: ["{{ trigger.event.data.path }}"]`. In Node-RED use an **events: all** node filtered on `mutual_fund_tracker_export_ready` and read `msg.payload.event.path` (or `.signed_url`).
+
+> Upgrading: PNGs left in `/config/www/mutual_fund_tracker/` by earlier versions are deleted automatically on startup. Update any automations that used `/local/mutual_fund_tracker/...`.
 
 ---
 
@@ -298,11 +358,11 @@ Status and control entities include:
 
 ## The app does not appear after adding the repository
 
-Check that the repository was added under **Settings → Apps → Install app → ⋮ → Repositories**, not under HACS. Refresh the browser if needed and check the Home Assistant Supervisor logs if the repository is rejected. Home Assistant documents invalid repository configuration as a common reason a third-party app repository does not appear. citeturn721807search1
+Check that the repository was added under **Settings → Apps → Install app → ⋮ → Repositories**, not under HACS. Refresh the browser if needed and check the Home Assistant Supervisor logs if the repository is rejected. Home Assistant documents invalid repository configuration as a common reason a third-party app repository does not appear. 
 
 ## The integration does not appear in HACS
 
-Make sure HACS is installed and configured, then add the GitHub repository as a **Custom repository → Integration**. The repository must be public and contain the required root `hacs.json` and README. citeturn240473search0
+Make sure HACS is installed and configured, then add the GitHub repository as a **Custom repository → Integration**. The repository must be public and contain the required root `hacs.json` and README. 
 
 ## The integration installs but shows no/old data
 
@@ -326,14 +386,14 @@ mutual-fund-tracker/
 │   ├── config.yaml
 │   ├── Dockerfile
 │   └── run.sh
-├── .github/
+├──.github/
 ├── hacs.json                      # HACS repository metadata
 ├── repository.yaml                 # Home Assistant app repository metadata
 ├── LICENSE
 └── README.md
 ```
 
-This lets the same GitHub repository serve both the Home Assistant app repository and the HACS integration repository. Home Assistant requires `repository.yaml` at the root for an app repository, while HACS requires its repository metadata at the root and the integration in the expected `custom_components/<domain>/` location. citeturn721807search0turn240473search0
+This lets the same GitHub repository serve both the Home Assistant app repository and the HACS integration repository. Home Assistant requires `repository.yaml` at the root for an app repository, while HACS requires its repository metadata at the root and the integration in the expected `custom_components/<domain>/` location. 
 
 ---
 
@@ -350,7 +410,7 @@ Future releases should use semantic versioning:
 2.0.0   breaking change
 ```
 
-When publishing through GitHub Releases, use the same release version in the app and integration metadata. HACS uses the published GitHub release tag as the remote version when releases are present. citeturn240473search0
+When publishing through GitHub Releases, use the same release version in the app and integration metadata. HACS uses the published GitHub release tag as the remote version when releases are present. 
 
 ---
 

@@ -55,7 +55,17 @@ Status/control entities include:
 
 ## Custom Lovelace card
 
-The repository includes the **Mutual Fund Tracker** custom Lovelace card. It reads the integration entities and does not access the app database directly.
+The card is registered automatically when the integration loads; no dashboard resource is needed. Use **Edit dashboard → + Add card → Mutual Fund Tracker**, or YAML `type: custom:mutual-fund-tracker-card`. (Manual resource URL, if wanted: `/api/mutual_fund_tracker/mutual-fund-tracker-card.js`, type *JavaScript module*.) It reads the integration entities and does not access the app database directly.
+
+## Export Portfolio PNG
+
+The button saves a snapshot to `/config/mutual_fund_tracker/exports/export-<random>.png` (private, not under `/www`; deleted after 24 hours) and fires `mutual_fund_tracker_export_ready` with `path`, `file_name`, `investor`, `signed_url`, `signed_url_scope` and `signed_url_expires_in`. Use `path` for Telegram/email (add the folder to `allowlist_external_dirs`). `signed_url` is for external services: it prefers your external URL, lasts 1 hour and stops working after a Home Assistant restart.
+
+```yaml
+action: telegram_bot.send_photo
+data:
+  file: "{{ trigger.event.data.path }}"
+```
 
 ## Troubleshooting
 
